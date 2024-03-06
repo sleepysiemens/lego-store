@@ -7,7 +7,7 @@
 
     @include('pages.main.blocks.hero')
     @include('pages.main.blocks.features')
-    <livewire:MainProducts />
+    <livewire:MainProducts lazy/>
     {{--@include('pages.main.blocks.sales')--}}
     {{--@include('pages.main.blocks.popular')--}}
     @include('pages.main.blocks.banner')

@@ -23,6 +23,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(auth()->user()!=null)
+        {
+            if(auth()->user()->is_admin)
+                return redirect()->route('admin.main.index');
+            else
+                //redirect на кабинет пользователя
+                return redirect()->route('main.index');
+        }
+        else
+        {
+            return redirect()->route('main.index');
+        }
+
+        //return view('home');
     }
 }

@@ -21,7 +21,7 @@
                     <div class="carousel-inner" role="listbox">
                         @foreach($categories as $category)
                             <div class="carousel-item @if($category==$categories->first()) active @endif rounded">
-                                <img src="{{asset('img/hero-img-1.png')}}" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                                <img src="{{asset('img/'.$category->img)}}" class="img-fluid w-100 h-100 rounded" alt="First slide">
                                 <a href="#" class="btn px-4 py-2 text-white rounded">{{$category->title_ru}}</a>
                             </div>
                         @endforeach

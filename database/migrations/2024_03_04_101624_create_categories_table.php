@@ -23,27 +23,6 @@ return new class extends Migration
 
             $table->string('img')->nullable();
         });
-
-        $data=
-            [
-                [
-                    'title_ru'=>'Детали',
-                    'title_en'=>'Bricks',
-                    'url'=>'bricks',
-                ],
-                [
-                    'title_ru'=>'Минифигурки',
-                    'title_en'=>'Minifigures',
-                    'url'=>'minifigs',
-                ],
-                [
-                    'title_ru'=>'Наборы',
-                    'title_en'=>'Sets',
-                    'url'=>'sets',
-                ],
-            ];
-        foreach ($data as $data_)
-            Category::create($data_);
     }
 
     /**

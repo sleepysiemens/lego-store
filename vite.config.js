@@ -18,6 +18,9 @@ export default defineConfig({
                 'resources/lib/lightbox/js/lightbox.min.js',
                 'resources/lib/owlcarousel/owl.carousel.min.js',
                 'resources/js/main.js',
+
+                'resources/css/adminlte.css',
+                'resources/js/adminlte.js',
             ],
             refresh: true,
         }),
