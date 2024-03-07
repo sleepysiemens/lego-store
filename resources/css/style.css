@@ -493,4 +493,13 @@
     line-height: 35px;
 }
 /*** Footer End ***/
+#cart-dropdown
+{
+    display: none;
+    transition: .3s;
+}
 
+#cart-btn:hover #cart-dropdown
+{
+    display: block;
+}

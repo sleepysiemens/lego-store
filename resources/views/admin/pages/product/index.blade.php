@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="me-2">Товары</h1>
+                    <h1 class="me-2"> @if($category->url=='all')Товары@elseif($category->url=='bricks')Детали@elseif($category->url=='minifigs')Минифигурки@elseif($category->url=='sets')Наборы@endif</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">

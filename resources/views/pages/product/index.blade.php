@@ -1,5 +1,9 @@
 @extends('layouts.wrapper')
 
+@section('shop')
+    active
+@endsection
+
 @section('content')
     @include('pages.product.blocks.welcome')
     <div class="container-fluid py-5 mt-5">
