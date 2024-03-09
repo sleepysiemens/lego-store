@@ -33,9 +33,10 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=>'/admin'], function (
 });
 
 //USER
-Route::group(['middleware' => ['auth']], function (){
+Route::group([], function (){
     Route::get('/cart','\App\Http\Controllers\CartController@index')->name('cart.index');
     Route::get('/checkout','\App\Http\Controllers\CartController@checkout')->name('cart.checkout');
+    Route::get('/empty-cart','\App\Http\Controllers\CartController@empty_cart')->name('cart.empty');
 
 });
 

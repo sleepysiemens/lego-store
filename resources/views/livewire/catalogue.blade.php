@@ -136,21 +136,23 @@
                         <div class="row g-4">
                             @foreach($products as $product)
                                 <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <a href="{{route('shop.show',$product->number)}}" class="rounded position-relative fruite-item overflow-hidden border-secondary border d-block">
-                                        <div class="fruite-img d-flex py-3">
+                                    <div class="rounded position-relative fruite-item overflow-hidden border-secondary border d-block">
+                                        <a href="{{route('shop.show',$product->number)}}" class="fruite-img d-flex py-3" style="height: 200px;">
                                             <img src="https://img.bricklink.com/ItemImage/PN/{{$product->bl_color}}/{{$product->bricklink_number}}.png" class="img-fluid h-100 rounded-top m-auto" style="object-fit: contain !important;" alt="">
-                                        </div>
+                                        </a>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{$product->category_title_ru}}</div>
                                         <div class="p-4 rounded-bottom border-top border-secondary">
-                                            <h4>{{$product->title}}</h4>
-                                            <p class="mb-1">Цвет: {{$product->color}}</p>
-                                            <p class="mt-0">В наличии: {{$product->amount}}</p>
+                                            <a href="{{route('shop.show',$product->number)}}">
+                                                <h4 style="height: 60px">{{$product->title}}</h4>
+                                                <p class="mb-1 text-muted">Цвет: {{$product->color}}</p>
+                                                <p class="mt-0 text-muted">В наличии: {{$product->amount}}</p>
+                                            </a>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
                                                 <p class="text-dark fs-5 fw-bold mb-0">{{$product->price}} ₽</p>
-                                                <button href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> {{__('В корзину')}}</button>
+                                                <livewire:AddToCart :product="$product"/>
                                             </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
                             @endforeach
 
