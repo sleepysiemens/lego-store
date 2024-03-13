@@ -36,7 +36,7 @@
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{$product->category_title_ru}}</div>
                                             <div class="p-4 rounded-bottom border-top border-secondary">
                                                 <a href="{{route('shop.show',$product->number)}}">
-                                                    <h4 style="height: 60px">{{$product->title}}</h4>
+                                                    <h4 style="height: 60px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{$product->title}}</h4>
                                                     <p class="mb-1 text-muted">Цвет: {{$product->color}}</p>
                                                     <p class="mt-0 text-muted">В наличии: {{$product->amount}}</p>
                                                 </a>

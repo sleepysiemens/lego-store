@@ -20,7 +20,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">Продаж</span>
-                <span class="info-box-number">760</span>
+                <span class="info-box-number">{{count($orders)}}</span>
             </div>
             <!-- /.info-box-content -->
         </div>

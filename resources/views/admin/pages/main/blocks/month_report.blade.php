@@ -47,7 +47,7 @@
 
                         <div class="progress-group">
                             Позиций добавлено в корзину
-                            <span class="float-right"><b>160</b>/200</span>
+                            <span class="float-right"><b>16</b>/20</span>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-primary" style="width: 80%"></div>
                             </div>
@@ -56,18 +56,18 @@
 
                         <div class="progress-group">
                             Успешных заказов
-                            <span class="float-right"><b>310</b>/400</span>
+                            <span class="float-right"><b>{{$succ_orders}}</b>/10</span>
                             <div class="progress progress-sm">
-                                <div class="progress-bar bg-danger" style="width: 75%"></div>
+                                <div class="progress-bar bg-danger" style="width: @if($succ_orders!=0) {{($succ_orders/10)*100}}% @else 0 @endif"></div>
                             </div>
                         </div>
 
                         <!-- /.progress-group -->
                         <div class="progress-group">
                             <span class="progress-text">Новых позиций</span>
-                            <span class="float-right"><b>480</b>/800</span>
+                            <span class="float-right"><b>{{$this_month_products}}</b>/20</span>
                             <div class="progress progress-sm">
-                                <div class="progress-bar bg-success" style="width: 60%"></div>
+                                <div class="progress-bar bg-success" style="width: @if($this_month_products) {{($this_month_products/20)*100}}% @else 0 @endif"></div>
                             </div>
                         </div>
 

@@ -1,6 +1,6 @@
 <div>
     @if($is_in_cart)
-        <div class="input-group quantity" style="width: 100px;">
+        <div class="input-group" style="width: 100px;">
             <div class="input-group-btn">
                 <button class="btn btn-sm btn-minus rounded-circle bg-light border" wire:click="decrement">
                     <i class="fa fa-minus"></i>

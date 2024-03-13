@@ -63,7 +63,7 @@
     </div>
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="#" class="navbar-brand"><h1 class="text-primary display-6">{{__('Build a Brick')}}</h1></a>
+            <a href="{{route('main.index')}}" class="navbar-brand"><h1 class="text-primary display-6">{{__('Build a Brick')}}</h1></a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-primary"></span>
             </button>
@@ -76,9 +76,15 @@
                 <div class="d-flex m-3 me-0 position-relative">
                     <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                     <livewire:HeaderCart/>
-                    <a href="#" class="my-auto">
-                        <i class="fas fa-user fa-2x"></i>
-                    </a>
+                    @if(auth()->user()!=null)
+                        <a href="{{route('profile.index')}}" class="my-auto @yield('profile')">
+                            <i class="fas fa-user fa-2x"></i>
+                        </a>
+                    @else
+                        <a href="{{route('login')}}" class="my-auto">
+                            <i class="fas fa-sign-in-alt fa-2x"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
         </nav>
@@ -115,16 +121,17 @@
             <div class="row g-4">
                 <div class="col-lg-3">
                     <a href="#">
-                        <h1 class="text-primary mb-0">Fruitables</h1>
-                        <p class="text-secondary mb-0">Fresh products</p>
+                        <h1 class="text-primary mb-0">Build a Brick</h1>
+                        <p class="text-secondary mb-0">{{__('Детали лего')}}</p>
                     </a>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="position-relative mx-auto">
-                        <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Your Email">
-                        <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Subscribe Now</button>
+                        <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="{{__('Ваш Email')}}">
+                        <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">{{__('Подписаться на обновления')}}</button>
                     </div>
                 </div>
+                {{--
                 <div class="col-lg-3">
                     <div class="d-flex justify-content-end pt-3">
                         <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
@@ -133,6 +140,7 @@
                         <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
+                --}}
             </div>
         </div>
         <div class="row g-5">

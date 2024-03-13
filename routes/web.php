@@ -30,18 +30,32 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=>'/admin'], function (
     Route::get('/product/{product}/edit','\App\Http\Controllers\Admin\ProductsController@edit')->name('admin.products.edit');
     Route::patch('/product/{product}','\App\Http\Controllers\Admin\ProductsController@update')->name('admin.products.update');
     Route::delete('/product/{product}','\App\Http\Controllers\Admin\ProductsController@delete')->name('admin.products.delete');
+
+    Route::get('/orders','\App\Http\Controllers\Admin\OrdersController@index')->name('admin.orders.index');
+    Route::get('/order/{number}','\App\Http\Controllers\Admin\OrdersController@show')->name('admin.orders.show');
+    Route::get('/order/{number}/edit','\App\Http\Controllers\Admin\OrdersController@edit')->name('admin.orders.edit');
+    Route::patch('/order/{order}','\App\Http\Controllers\Admin\OrdersController@update')->name('admin.orders.update');
+
 });
 
 //USER
 Route::group([], function (){
     Route::get('/cart','\App\Http\Controllers\CartController@index')->name('cart.index');
+    Route::post('/check','\App\Http\Controllers\CartController@check')->name('cart.check');
     Route::get('/checkout','\App\Http\Controllers\CartController@checkout')->name('cart.checkout');
     Route::get('/empty-cart','\App\Http\Controllers\CartController@empty_cart')->name('cart.empty');
+});
 
+Route::group(['middleware'=>'auth'], function (){
+    Route::get('/profile','\App\Http\Controllers\ProfileController@index')->name('profile.index');
+    Route::get('/order/{number}','\App\Http\Controllers\OrderController@index')->name('order.index');
+
+
+    Route::post('/create_order','\App\Http\Controllers\OrderController@create')->name('order.create');
+    Route::get('/successful_payment','\App\Http\Controllers\OrderController@successful_payment')->name('successful_payment');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/fill','\App\Http\Controllers\MainController@fill')->name('fill');
+Route::get('/logout', '\App\Http\Controllers\Auth\LogoutController@index')->name('logout.get');

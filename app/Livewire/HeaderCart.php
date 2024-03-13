@@ -5,22 +5,20 @@ namespace App\Livewire;
 use App\Models\Product;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class HeaderCart extends Component
 {
-    public $cartItems = [];
-    public $cart = [];
-    public $amount = 0;
 
-    protected $listeners = ['UpdateCart'];
-
-    public function UpdateCart()
+    #[On('UpdateCart')]
+    public function render()
     {
-        $this->cartItems = Session::get('cart');
+        $cartItems = Session::get('cart');
+        $cart=[];
 
-        if ($this->cartItems != null) {
-            foreach ($this->cartItems as $item) {
+        if ($cartItems != null) {
+            foreach ($cartItems as $item) {
                 $product = Product::query()
                     ->where('products.id', '=', $item['product_id'])
                     ->join('colors', 'colors.bl_num', '=', 'products.color_id')
@@ -29,20 +27,11 @@ class HeaderCart extends Component
                 $product->setAttribute('amount', $item['amount']);
                 $product->setAttribute('total', $item['amount'] * $product->price);
 
-                $this->cart[] = $product;
+                $cart[] = $product;
             }
         }
-        $this->amount=count($this->cart);
-    }
+        $amount=count($cart);
 
-    public function mount()
-    {
-        $this->UpdateCart();
-        //dd($this->amount);
-    }
-
-    public function render()
-    {
-        return view('livewire.header-cart');
+        return view('livewire.header-cart', compact(['amount','cart']));
     }
 }

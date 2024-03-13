@@ -14,20 +14,10 @@
                 <p class="mb-1">Артикул: {{$product->number}}</p>
                 <p class="mb-1">Артикул BL: {{$product->bricklink_number}}</p>
                 <p class="mb-1">В наличии: {{$product->amount}}</p>
-                <div class="input-group quantity mb-5" style="width: 100px;">
-                    <div class="input-group-btn">
-                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                    <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                    <div class="input-group-btn">
-                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </div>
+
+                <div class="row mt-4">
+                    <livewire:AddToCart :product="$product"/>
                 </div>
-                <button href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> {{__('В корзину')}}</button>
             </div>
             <div class="col-lg-12">
                 <nav>

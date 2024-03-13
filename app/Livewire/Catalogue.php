@@ -26,7 +26,11 @@ class Catalogue extends Component
         }
 
         $colors=array_unique($colors);
+
+        $amount[1]=Product::query()->where('category_id','=',1)->count();
+        $amount[2]=Product::query()->where('category_id','=',2)->count();
+        $amount[3]=Product::query()->where('category_id','=',3)->count();
         //dd(($colors));
-        return view('livewire.catalogue', compact(['products', 'categories', 'colors']));
+        return view('livewire.catalogue', compact(['products', 'categories', 'colors', 'amount']));
     }
 }

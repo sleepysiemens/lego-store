@@ -35,11 +35,11 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.orders.index')}}" class="nav-link @yield('orders')">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                         Заказы
-                        <span class="badge badge-info right">6</span>
+                        <span class="badge badge-info right">{{$new_orders_cnt}}</span>
                     </p>
                 </a>
             </li>
@@ -76,6 +76,14 @@
                         </li>
                     @endforeach
                 </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('logout.get')}}" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <p>
+                        Выйти
+                    </p>
+                </a>
             </li>
         </ul>
     </nav>

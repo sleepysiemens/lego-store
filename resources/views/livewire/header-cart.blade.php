@@ -1,8 +1,8 @@
 <div class="my-auto position-relative" id="cart-btn">
-    <a href="{{route('cart.index')}}" class="position-relative me-4 my-auto">
+    <a href="{{route('cart.index')}}" class="position-relative me-4 my-auto @yield('cart')">
         <i class="fa fa-shopping-bag fa-2x"></i>
         @if($amount!=0)
-            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{$amount}}</span>
+            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px; @yield('cart-circle')">{{$amount}}</span>
         @endif
     </a>
     <div class="position-absolute card border-primary shadow" id="cart-dropdown" style="width: 400px; right: 0">

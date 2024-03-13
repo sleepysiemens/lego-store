@@ -2,113 +2,106 @@
 
 namespace App\Livewire;
 
+use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
+use Livewire\Features\SupportEvents\Event;
 
 class AddToCart extends Component
 {
-    public $product;
-    public $cart;
-
-    public function mount()
+    public $prodict;
+    public $is_in_cart=false;
+    public $amount=0;
+    public function mount($product)
     {
-        $this->cart=Session::get('cart');
+        $this->prodict=$product;
     }
 
-    public function InitItems($product)
-    {
-        $this->product=$product;
-    }
-
-    public function update_cart()
-    {
-        Session::put('cart', $this->cart);
-        //$this->dispatch('UpdateCart');
-    }
-
-    //Первое добавление товара в корзину
     public function add_to_cart()
     {
-        if($this->cart==null)
+        if(Session::get('cart')==null or !isset(Session::get('cart')[0]))
         {
-            $this->cart=[['product_id'=>$this->product->id, 'amount'=>1]];
+            $cart=collect([['id'=>0, 'product_id'=>$this->prodict->id, 'amount'=>1]]);
+            Session::put('cart',$cart);
+            $this->dispatch('UpdateCart');
         }
         else
         {
-            //Проверка наличия товара в корзине
-            if(collect($this->cart)->where('product_id','=',$this->product->id)->first()==null)
+            $cart=Session::get('cart');
+
+            if($cart->where('product_id','=',$this->prodict->id)->first()==null)
             {
-                $this->cart[]=['product_id'=>$this->product->id, 'amount'=>1];
+                $id=$cart->last()['id']+1;
+                $cart[]=['id'=>$id, 'product_id'=>$this->prodict->id, 'amount'=>1];
+                Session::put('cart',$cart);
+                $this->dispatch('UpdateCart');
             }
         }
-        $this->update_cart();
     }
 
-    //Увеличить кол-во в корзине
     public function increment()
     {
-        $cart_id=array_search($this->product->id, array_column($this->cart, 'product_id'));
+        $cart=Session::get('cart');
+        $cart_elem=$cart->where('product_id','=',$this->prodict->id)->first();
 
-        if($this->cart[$cart_id]['amount']<$this->product->amount)
+        if($cart_elem['amount']<$this->prodict->amount)
         {
-            $this->cart[$cart_id]['amount']++;
-            $this->update_cart();
+            $cart_elem['amount']=$cart_elem['amount']+1;
+            $cart[$cart_elem['id']]=$cart_elem;
+            Session::put('cart',$cart);
+            $this->dispatch('UpdateCart');
+
         }
     }
 
     public function decrement()
     {
-        $cart_id=array_search($this->product->id, array_column($this->cart, 'product_id'));
+        $cart=Session::get('cart');
+        $cart_elem=$cart->where('product_id','=',$this->prodict->id)->first();
 
-        if($this->cart[$cart_id]['amount']>1)
+        if($cart_elem['amount']>1)
         {
-            $this->cart[$cart_id]['amount']--;
-            $this->update_cart();
+            $cart_elem['amount']=$cart_elem['amount']-1;
+            $cart[$cart_elem['id']]=$cart_elem;
         }
         else
         {
-            unset($this->cart[$cart_id]);
-            $this->update_cart();
+            unset($cart[$cart_elem['id']]);
         }
+
+        Session::put('cart',$cart);
+        $this->is_in_cart=false;
+
+        $this->dispatch('UpdateCart');
     }
 
     public function hand_input($value)
     {
-        $cart_id=array_search($this->product->id, array_column($this->cart, 'product_id'));
+        $cart=Session::get('cart');
+        $cart_elem=$cart->where('product_id','=',$this->prodict->id)->first();
 
-        if($value<$this->product->amount)
+        if($value<=$this->prodict->amount and $value>0)
         {
-            if($value<=0)
-            {
-                unset($this->cart[$cart_id]);
-            }
-            else
-            {
-                $this->cart[$cart_id]['amount']=$value;
-            }
-            $this->update_cart();
+            $cart_elem['amount']=$value;
         }
+        elseif($value<1)
+        {
+            unset($cart[$cart_elem['id']]);
+        }
+        Session::put('cart',$cart);
+        $this->dispatch('UpdateCart');
+
     }
 
     public function render()
     {
-        $amount=0;
-        if($this->cart!=null)
+        if(Session::get('cart')!=null and Session::get('cart')->where('product_id','=',$this->prodict->id)->first()!=null)
         {
-            if(collect($this->cart)->where('product_id','=',$this->product->id)->first()!=null)
-            {
-                $is_in_cart=true;
-                $amount=collect($this->cart)->where('product_id','=',$this->product->id)->first()['amount'];
-            }
-            else
-            {
-                $is_in_cart=false;
-            }
+            $this->is_in_cart=true;
+
+            $this->amount=Session::get('cart')->where('product_id','=',$this->prodict->id)->first()['amount'];
         }
-        else
-        {
-            $is_in_cart=false;
-        }
-        return view('livewire.add-to-cart', compact(['is_in_cart', 'amount']));
+
+        return view('livewire.add-to-cart');
     }
 }

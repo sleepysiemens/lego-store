@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('img')->nullable();
             $table->integer('color_id')->nullable();
-            $table->string('number')->nullable();
+            $table->string('number')->unique();
             $table->string('bricklink_number')->nullable();
             $table->string('other_numbers')->nullable();
             $table->decimal('price')->default(1);
