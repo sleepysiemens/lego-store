@@ -3,34 +3,64 @@
 namespace App\Livewire;
 
 use App\Models\Category;
-use App\Models\Color;
-use App\Models\Product;
+use App\Services\RenderCatalogue;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Catalogue extends Component
 {
     use WithPagination;
-    public function render()
+
+    public $sort='id';
+    public $sort_method='asc';
+    public $filter=[];
+
+    public function mount($filter)
     {
-        $products=Product::query()->where('is_available','=',true)
-            ->join('categories','categories.id','=','products.category_id')
-            ->join('colors','colors.id','=','products.color_id')
-            ->select('products.*','categories.title_ru as category_title_ru','categories.title_en as category_title_en', 'colors.title as color', 'colors.bl_num as bl_color')
-            ->paginate(9);
-        $categories=Category::all();
-        $colors=[];
-        foreach (Product::all() as $product)
+        $this->filter=$filter;
+    }
+
+    public function sorting($method)
+    {
+        switch ($method)
         {
-            $colors[]=Color::query()->where('bl_num', '=',$product->color_id)->first();
+            default:
+                $this->sort='id';
+                $this->sort_method='asc';
+                break;
+            case 'price_low_to_high':
+                $this->sort='products.price';
+                $this->sort_method='asc';
+                break;
+            case 'price_high_to_low':
+                $this->sort='products.price';
+                $this->sort_method='desc';
+                break;
+            case 'is_available':
+                $this->sort='products.amount';
+                $this->sort_method='desc';
+                break;
         }
+    }
 
-        $colors=array_unique($colors);
+    public function render(RenderCatalogue $renderCatalogue)
+    {
+        //получаем отсортированные товары
+        $products=$renderCatalogue->get_products($this->sort, $this->sort_method, $this->filter);
 
-        $amount[1]=Product::query()->where('category_id','=',1)->count();
-        $amount[2]=Product::query()->where('category_id','=',2)->count();
-        $amount[3]=Product::query()->where('category_id','=',3)->count();
-        //dd(($colors));
-        return view('livewire.catalogue', compact(['products', 'categories', 'colors', 'amount']));
+        $products=$products->paginate(9);
+
+
+        //категории
+        $categories=Category::all();
+
+        //Цвета
+        $colors=$renderCatalogue->get_colors();
+
+        //Количество товаров
+        $amount=$renderCatalogue->get_amount();
+
+        return view('livewire.catalogue', compact(['products','categories', 'colors', 'amount']));
     }
 }

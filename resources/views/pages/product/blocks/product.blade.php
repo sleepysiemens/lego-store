@@ -4,7 +4,12 @@
         <div class="row g-4">
             <div class="col-lg-6">
                 <div class="border rounded h-100 d-flex">
-                    <img src="https://img.bricklink.com/ItemImage/PN/{{$product->bl_color}}/{{$product->bricklink_number}}.png" class="rounded h-75 m-auto" alt="Image">
+                    @if($product->bl_color!=1000)
+                        <img src="https://img.bricklink.com/ItemImage/PN/{{$product->bl_color}}/{{$product->bricklink_number}}.png" class="rounded h-75 m-auto" alt="Image">
+                    @else
+                        <img src="https://img.bricklink.com/ItemImage/ON/0/{{$product->bricklink_number}}.png" class="rounded h-75 m-auto" alt="Image">
+
+                    @endif
                 </div>
             </div>
             <div class="col-lg-6">
@@ -37,7 +42,11 @@
                                             <p class="mb-0">{{__('Вес')}}</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="mb-0">{{$product->weight}} {{__('г')}}</p>
+                                            @if($product->weight!=null)
+                                                <p class="mb-0">{{$product->weight}} {{__('г')}}</p>
+                                            @else
+                                                <p class="mb-0">? {{__('г')}}</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row text-center align-items-center justify-content-center py-2">
@@ -45,7 +54,11 @@
                                             <p class="mb-0">{{__('Цвет')}}</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="mb-0">{{$product->color}}</p>
+                                            @if($product->bl_color!=1000)
+                                                <p class="mb-0">{{$product->color}}</p>
+                                            @else
+                                                <p class="mb-0">Не установлено</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row bg-light text-center align-items-center justify-content-center py-2">

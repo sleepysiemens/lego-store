@@ -836,6 +836,11 @@ class colors_fill extends Command
                     'bl_num'=>170,
                     'hex'=>'#ebf72d'
                 ],
+                [
+                    'title'=>'Unset',
+                    'bl_num'=>1000,
+                    'hex'=>'#ebf72d'
+                ],
             ];
         foreach ($data as $fill)
         {

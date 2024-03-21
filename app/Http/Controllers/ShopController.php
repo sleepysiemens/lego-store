@@ -9,7 +9,17 @@ class ShopController extends Controller
 {
     public function index()
     {
-        return view('pages.shop.index');
+        $filter=[];
+        if(isset($_GET['category']))
+        {
+            $filter['category']=$_GET['category'];
+        }
+        if(isset($_GET['color']))
+        {
+            $filter['color']=$_GET['color'];
+        }
+
+        return view('pages.shop.index', compact(['filter']));
     }
 
     public function show($product)

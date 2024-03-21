@@ -1744,10 +1744,10 @@ class fill extends Command
                 ],
                 #
                 [
-                    'title'=>'',
+                    'title'=>'Minifigure, Utensil Lantern',
                     'color_id'=>'77',
                     'number'=>'6234116',
-                    'bricklink_number'=>'6234116',
+                    'bricklink_number'=>'37776',
                     'other_numbers'=>'',
                     'price'=>'50',
                     'is_available'=>'1',
@@ -1802,6 +1802,19 @@ class fill extends Command
                     'is_available'=>'1',
                     'category_id'=>'1',
                     'weight'=>'0.61',
+                    'amount'=>1
+                ],
+
+                #sets
+                [
+                    'title'=>'Snow Groomer',
+                    'color_id'=>'1000',
+                    'number'=>'42148',
+                    'bricklink_number'=>'42148-1',
+                    'other_numbers'=>'',
+                    'price'=>'800',
+                    'is_available'=>'1',
+                    'category_id'=>'3',
                     'amount'=>1
                 ],
             ];

@@ -6,6 +6,6 @@
 @section('content')
 
     @include('pages.shop.blocks.welcome')
-    <livewire:Catalogue lazy/>
+    <livewire:Catalogue :filter="$filter" lazy/>
 
 @endsection
