@@ -10,7 +10,7 @@
     <livewire:MainProducts lazy/>
     {{--@include('pages.main.blocks.sales')--}}
     {{--@include('pages.main.blocks.popular')--}}
-    @include('pages.main.blocks.banner')
+    {{--@include('pages.main.blocks.banner')--}}
     @include('pages.main.blocks.fact')
     @include('pages.main.blocks.reviews')
 
