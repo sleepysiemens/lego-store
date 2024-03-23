@@ -503,3 +503,24 @@
 {
     display: block;
 }
+
+.searchbar
+{
+    transition: .3s;
+    width: 350px;
+    display: block;
+    animation-name: searchbar-toggle;
+    animation-duration: .5s;
+}
+
+@keyframes searchbar-toggle
+{
+    from {width: 44px}
+    to {width: 350px}
+}
+
+.searchbar-hidden
+{
+    width: 0 !important;
+    display: none;
+}

@@ -30,14 +30,15 @@
 
     'resources/lib/easing/easing.min.js',
     'resources/lib/waypoints/waypoints.min.js',
-    'resources/lib/lightbox/js/lightbox.min.js',
+    //'resources/lib/lightbox/js/lightbox.min.js',
     'resources/lib/owlcarousel/owl.carousel.min.js',
     'resources/js/main.js',
+    'resources/js/app.js',
     ])
 
 </head>
 
-<body>
+<body id="app">
 
 <!-- Spinner Start -->
 <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
