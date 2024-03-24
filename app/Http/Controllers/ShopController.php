@@ -18,8 +18,14 @@ class ShopController extends Controller
         {
             $filter['color']=$_GET['color'];
         }
+        if(isset($_GET['search']))
+        {
+            $filter['search']=$_GET['search'];
+        }
+        $all_products=$this->cacheService->products_cache();
 
-        return view('pages.shop.index', compact(['filter']));
+
+        return view('pages.shop.index', compact(['filter', 'all_products']));
     }
 
     public function show($product)
@@ -35,6 +41,9 @@ class ShopController extends Controller
             ->join('colors','colors.id','=','products.color_id')
             ->select('products.*','categories.title_ru as category_title_ru','categories.title_en as category_title_en', 'colors.title as color', 'colors.bl_num as bl_color')
             ->limit(8)->get();
-        return view('pages.product.index', compact(['product', 'related_products']));
+
+        $all_products=$this->cacheService->products_cache();
+
+        return view('pages.product.index', compact(['product', 'related_products', 'all_products']));
     }
 }

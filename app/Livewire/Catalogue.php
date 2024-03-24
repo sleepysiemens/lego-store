@@ -51,7 +51,6 @@ class Catalogue extends Component
 
         $products=$products->paginate(9);
 
-
         //категории
         $categories=Category::all();
 

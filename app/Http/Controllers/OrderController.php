@@ -56,7 +56,9 @@ class OrderController extends Controller
                 $cart[]=$product;
             }
         }
+        $all_products=$this->cacheService->products_cache();
 
-        return view('pages.order.index', compact(['order', 'cart']));
+
+        return view('pages.order.index', compact(['order', 'cart', 'all_products']));
     }
 }

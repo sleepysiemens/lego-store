@@ -37,20 +37,21 @@
     ])
 
 </head>
-
-<body id="app">
+<body>
 
 <!-- Spinner Start -->
 <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-primary" role="status"></div>
 </div>
 <!-- Spinner End -->
+<div id="app">
+    @include('layouts.wrapper-blocks.header')
 
-@include('layouts.wrapper-blocks.header')
+    @yield('content')
 
-@yield('content')
+    @include('layouts.wrapper-blocks.footer')
+</div>
 
-@include('layouts.wrapper-blocks.footer')
 
 
 <!-- Copyright Start -->
@@ -85,4 +86,11 @@
     $('body').on('input', '.input-number', function(){
         this.value = this.value.replace(/[^0-9]/g, '');
     });
+</script>
+
+<script>
+    // Интегрируем массив напрямую в JavaScript
+    window.products = @json($all_products);
+
+    //console.log(window.products);
 </script>

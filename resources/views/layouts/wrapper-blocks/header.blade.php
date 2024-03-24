@@ -25,7 +25,9 @@
                     <a href="{{route('contact.index')}}" class="nav-item nav-link @yield('contact')">{{__('Контакты')}}</a>
                 </div>
                 <div class="d-flex m-3 me-0 position-relative">
-                    <livewire:HeaderSearch/>
+                    <searchbar-component></searchbar-component>
+
+                    {{--<livewire:HeaderSearch/>--}}
                     <livewire:HeaderCart/>
                     @if(auth()->user()!=null)
                         <a href="{{route('profile.index')}}" class="my-auto @yield('profile')">

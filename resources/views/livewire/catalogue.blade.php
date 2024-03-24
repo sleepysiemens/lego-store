@@ -1,11 +1,11 @@
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
             <div class="row g-4">
-            <div class="col-lg-12">
+            <form method="get" action="" class="col-lg-12">
                 <div class="row g-4">
                     <div class="col-xl-3">
                         <div class="input-group w-100 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="Поиск" aria-describedby="search-icon-1">
+                            <input type="search" name="search" class="form-control p-3" placeholder="Поиск" aria-describedby="search-icon-1" @if(isset($filter['search'])) value="{{$filter['search']}}" @endif>
                             <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="row g-4">
-                    <form class="col-lg-3" method="get" action="">
+                    <div class="col-lg-3">
                         <div class="row g-4">
                             <div class="col-lg-12">
                                 <div class="mb-3">
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                     <div class="col-lg-9">
                         <div class="row g-4">
                             @foreach($products as $product)
@@ -109,13 +109,20 @@
                                 </div>
                             @endforeach
 
+                            @if($products->items()==null)
+                                <div class="text-center mt-5">
+                                    <h1>Ничего не найдено</h1>
+                                    <p>Попробуйте сбросить фильтр</p>
+                                </div>
+                            @endif
+
                             <div class="col-12">
                                 {{$products->links()}}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

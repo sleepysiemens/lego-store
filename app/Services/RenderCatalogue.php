@@ -12,12 +12,25 @@ class RenderCatalogue
 {
     public function get_products($sort, $sort_method, $filter)
     {
-        $products=Product::query()->where('is_available','=',true)
-            ->join('categories','categories.id','=','products.category_id')
-            ->join('colors','colors.bl_num','=','products.color_id')
-            ->select('products.*','categories.title_ru as category_title_ru','categories.title_en as category_title_en', 'colors.title as color', 'colors.bl_num as bl_color')
-            #->orderBy($sort, $sort_method)
-        ;
+        if(isset($filter['search']))
+        {
+            $products=Product::query()->where('is_available','=',true)->where('search_line','like','%'.$filter['search'].'%')
+                ->join('categories','categories.id','=','products.category_id')
+                ->join('colors','colors.bl_num','=','products.color_id')
+                ->select('products.*','categories.title_ru as category_title_ru','categories.title_en as category_title_en', 'colors.title as color', 'colors.bl_num as bl_color')
+                #->orderBy($sort, $sort_method)
+            ;
+        }
+        else
+        {
+            $products=Product::query()->where('is_available','=',true)
+                ->join('categories','categories.id','=','products.category_id')
+                ->join('colors','colors.bl_num','=','products.color_id')
+                ->select('products.*','categories.title_ru as category_title_ru','categories.title_en as category_title_en', 'colors.title as color', 'colors.bl_num as bl_color')
+            ;
+        }
+
+
         #CATEGORY
         if(isset($filter['category']))
         {

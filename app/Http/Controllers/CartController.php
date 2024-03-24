@@ -13,7 +13,9 @@ class CartController extends Controller
     public function index()
     {
         $is_empty=Session::get('cart')==null;
-        return view('pages.cart.index', compact(['is_empty']));
+        $all_products=$this->cacheService->products_cache();
+
+        return view('pages.cart.index', compact(['is_empty', 'all_products']));
     }
 
     public function check()
@@ -72,8 +74,10 @@ class CartController extends Controller
                 $cart[]=$product;
             }
         }
-        $order_info=Session::get('order_info');;
-        return view('pages.checkout.index', compact(['cart', 'order_info']));
+        $order_info=Session::get('order_info');
+        $all_products=$this->cacheService->products_cache();
+
+        return view('pages.checkout.index', compact(['cart', 'order_info', 'all_products']));
     }
 
     public function empty_cart()

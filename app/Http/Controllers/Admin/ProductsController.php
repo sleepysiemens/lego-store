@@ -40,6 +40,7 @@ class ProductsController
                 'price'=>request()->price,
                 'category_id'=>request()->category_id,
                 'amount'=>request()->amount,
+                'search_link'=>request()->title.'/'.request()->number.'/'.request()->bricklink_number.'/'.request()->other_numbers,
             ];
 
         if(request()->is_available==null)

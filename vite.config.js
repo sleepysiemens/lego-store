@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue'
+
 
 export default defineConfig({
-    plugins: [
+    plugins: [vue(),
         laravel({
             input: [
                 'resources/sass/app.scss',
@@ -15,7 +17,7 @@ export default defineConfig({
 
                 'resources/lib/easing/easing.min.js',
                 'resources/lib/waypoints/waypoints.min.js',
-                'resources/lib/lightbox/js/lightbox.min.js',
+                //'resources/lib/lightbox/js/lightbox.min.js',
                 'resources/lib/owlcarousel/owl.carousel.min.js',
                 'resources/js/main.js',
 
