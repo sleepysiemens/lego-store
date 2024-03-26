@@ -1,13 +1,13 @@
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
             <div class="row g-4">
-            <form method="get" action="" class="col-lg-12">
+            <div class="col-lg-12">
                 <div class="row g-4">
                     <div class="col-xl-3">
-                        <div class="input-group w-100 mx-auto d-flex">
+                        <form method="get" action="" class="input-group w-100 mx-auto d-flex">
                             <input type="search" name="search" class="form-control p-3" placeholder="Поиск" aria-describedby="search-icon-1" @if(isset($filter['search'])) value="{{$filter['search']}}" @endif>
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
+                            <button id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
                     <div class="col-6"></div>
                     <div class="col-xl-3">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-3">
-                        <div class="row g-4">
+                        <form method="get" action="" class="row g-4">
                             <div class="col-lg-12">
                                 <div class="mb-3">
                                     <h4>{{__('Категории')}}</h4>
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-lg-9">
                         <div class="row g-4">
@@ -122,7 +122,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

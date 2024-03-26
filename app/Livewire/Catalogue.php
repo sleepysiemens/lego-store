@@ -44,6 +44,14 @@ class Catalogue extends Component
         }
     }
 
+    public function gotoPage($page)
+    {
+        $filter=$this->filter;
+        $filter['page']=$page;
+        //dd($filter);
+        return redirect()->route('shop.index',$filter);
+    }
+
     public function render(RenderCatalogue $renderCatalogue)
     {
         //получаем отсортированные товары

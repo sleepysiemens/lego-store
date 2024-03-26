@@ -3,25 +3,26 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 use Livewire\Features\SupportEvents\Event;
 
 class AddToCart extends Component
 {
-    public $prodict;
+    public $product;
     public $is_in_cart=false;
     public $amount=0;
     public function mount($product)
     {
-        $this->prodict=$product;
+        $this->product=$product;
     }
 
     public function add_to_cart()
     {
         if(Session::get('cart')==null or !isset(Session::get('cart')[0]))
         {
-            $cart=collect([['id'=>0, 'product_id'=>$this->prodict->id, 'amount'=>1]]);
+            $cart=collect([['id'=>0, 'product_id'=>$this->product->id, 'amount'=>1]]);
             Session::put('cart',$cart);
             $this->dispatch('UpdateCart');
         }
@@ -29,10 +30,10 @@ class AddToCart extends Component
         {
             $cart=Session::get('cart');
 
-            if($cart->where('product_id','=',$this->prodict->id)->first()==null)
+            if($cart->where('product_id','=',$this->product->id)->first()==null)
             {
                 $id=$cart->last()['id']+1;
-                $cart[]=['id'=>$id, 'product_id'=>$this->prodict->id, 'amount'=>1];
+                $cart[]=['id'=>$id, 'product_id'=>$this->product->id, 'amount'=>1];
                 Session::put('cart',$cart);
                 $this->dispatch('UpdateCart');
             }
@@ -42,9 +43,9 @@ class AddToCart extends Component
     public function increment()
     {
         $cart=Session::get('cart');
-        $cart_elem=$cart->where('product_id','=',$this->prodict->id)->first();
+        $cart_elem=$cart->where('product_id','=',$this->product->id)->first();
 
-        if($cart_elem['amount']<$this->prodict->amount)
+        if($cart_elem['amount']<$this->product->amount)
         {
             $cart_elem['amount']=$cart_elem['amount']+1;
             $cart[$cart_elem['id']]=$cart_elem;
@@ -57,7 +58,7 @@ class AddToCart extends Component
     public function decrement()
     {
         $cart=Session::get('cart');
-        $cart_elem=$cart->where('product_id','=',$this->prodict->id)->first();
+        $cart_elem=$cart->where('product_id','=',$this->product->id)->first();
 
         if($cart_elem['amount']>1)
         {
@@ -78,9 +79,9 @@ class AddToCart extends Component
     public function hand_input($value)
     {
         $cart=Session::get('cart');
-        $cart_elem=$cart->where('product_id','=',$this->prodict->id)->first();
+        $cart_elem=$cart->where('product_id','=',$this->product->id)->first();
 
-        if($value<=$this->prodict->amount and $value>0)
+        if($value<=$this->product->amount and $value>0)
         {
             $cart_elem['amount']=$value;
         }
@@ -95,11 +96,11 @@ class AddToCart extends Component
 
     public function render()
     {
-        if(Session::get('cart')!=null and Session::get('cart')->where('product_id','=',$this->prodict->id)->first()!=null)
+        if(Session::get('cart')!=null and Session::get('cart')->where('product_id','=',$this->product->id)->first()!=null)
         {
             $this->is_in_cart=true;
 
-            $this->amount=Session::get('cart')->where('product_id','=',$this->prodict->id)->first()['amount'];
+            $this->amount=Session::get('cart')->where('product_id','=',$this->product->id)->first()['amount'];
         }
 
         return view('livewire.add-to-cart');

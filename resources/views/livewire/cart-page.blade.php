@@ -21,7 +21,7 @@
                         </div>
                     </th>
                     <td>
-                        <p class="mb-0 mt-4">{{$product->title}}</p>
+                        <a href="{{route('shop.show', $product->number)}}" class="mb-0 mt-4 d-block">{{$product->title}}</a>
                     </td>
                     <td>
                         <p class="mb-0 mt-4">{{$product->number}}</p>
