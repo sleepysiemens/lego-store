@@ -88,9 +88,11 @@
     });
 </script>
 
+@if(isset($all_products))
 <script>
     // Интегрируем массив напрямую в JavaScript
     window.products = @json($all_products);
 
     //console.log(window.products);
 </script>
+@endif

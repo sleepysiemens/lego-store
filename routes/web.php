@@ -36,6 +36,8 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=>'/admin'], function (
     Route::get('/order/{number}/edit','\App\Http\Controllers\Admin\OrdersController@edit')->name('admin.orders.edit');
     Route::patch('/order/{order}','\App\Http\Controllers\Admin\OrdersController@update')->name('admin.orders.update');
 
+    Route::patch('/update_cities','\App\Http\Controllers\Admin\MainController@update_cities')->name('admin.update_cities');
+
 });
 
 //USER

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Facades\Cache;
 
 class MainController extends Controller
 {
@@ -24,6 +25,33 @@ class MainController extends Controller
 
         $this_month_products=Product::query()->where('created_at', '>=', date("Y-m-d H:i:s",strtotime('first day of month')))->count();
         $succ_orders=Order::query()->where('updated_at','>=',date("Y-m-d H:i:s",strtotime('first day of month')))->where('status','=',6)->count();
-        return view('admin.pages.main.index', compact(['orders', 'bricks_amount', 'minifigs_amount', 'sets_amount', 'latest_products', 'this_month_products', 'succ_orders']));
+
+        $cities_amount=0;
+
+        if(Cache::has('cities'))
+        {
+            $cities_amount=count(Cache::get('cities'));
+        }
+
+        return view('admin.pages.main.index', compact(['orders', 'bricks_amount', 'minifigs_amount', 'sets_amount', 'latest_products', 'this_month_products', 'succ_orders', 'cities_amount']));
+    }
+
+    public function update_cities()
+    {
+        if (request()->hasFile('cities_list'))
+        {
+            request()->file('cities_list')->move(public_path(), 'cities_list.json');
+
+            if (file_exists(public_path('cities_list.json')))
+            {
+                $cities=collect(json_decode(file_get_contents(public_path('cities_list.json'))));
+                $regions=$cities->pluck('region')->unique()->values()->all();
+                $cities=$cities->pluck('city')->unique()->values()->all();
+                Cache::put('cities', $cities);
+                Cache::put('regions', $regions);
+            }
+        }
+
+        return redirect()->route('admin.main');
     }
 }

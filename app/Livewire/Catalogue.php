@@ -48,7 +48,24 @@ class Catalogue extends Component
     {
         $filter=$this->filter;
         $filter['page']=$page;
-        //dd($filter);
+        return redirect()->route('shop.index',$filter);
+    }
+
+    public function nextPage()
+    {
+        $filter=$this->filter;
+        if(isset($filter['page']))
+            $filter['page']=$filter['page']+1;
+        else
+            $filter['page']=2;
+        return redirect()->route('shop.index',$filter);
+    }
+
+    public function previousPage()
+    {
+        $filter=$this->filter;
+        $filter['page']=$filter['page']-1;
+
         return redirect()->route('shop.index',$filter);
     }
 
