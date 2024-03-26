@@ -35,9 +35,10 @@
             </div>
             <h5 class="mt-4">{{__('Информация о доставке')}}</h5>
 
+
             <div class="card">
                 <div class="card-body">
-                    <livewire:DeliveryInfo/>
+                    <delivery-data-component :regions="{{json_encode($regions)}}" :cities="{{json_encode($cities)}}"></delivery-data-component>
                 </div>
             </div>
 

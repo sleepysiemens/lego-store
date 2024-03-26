@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -15,7 +16,27 @@ class CartController extends Controller
         $is_empty=Session::get('cart')==null;
         $all_products=$this->cacheService->products_cache();
 
-        return view('pages.cart.index', compact(['is_empty', 'all_products']));
+        if(!Cache::has('cities') and Cache::has('regions'))
+        {
+            $cities=Cache::get('cities');
+            $regions=Cache::get('regions');
+        }
+        else {
+            if (file_exists(public_path('cities_list.json'))) {
+                $cities = collect(json_decode(file_get_contents(public_path('cities_list.json'))));
+                $regions = collect(json_decode(file_get_contents(public_path('cities_list.json'))));
+                $regions = $regions->pluck('region')->unique()->values()->all();
+                Cache::put('cities', $cities);
+                Cache::put('regions', $regions);
+            } else {
+                $cities = [];
+                $regions = [];
+            }
+        }
+
+        //dd(json_encode($cities));
+
+        return view('pages.cart.index', compact(['is_empty', 'all_products', 'cities', 'regions']));
     }
 
     public function check()
