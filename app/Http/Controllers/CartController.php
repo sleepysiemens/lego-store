@@ -36,7 +36,7 @@ class CartController extends Controller
 
         //dd(json_encode($cities));
 
-        return view('pages.cart.index', compact(['is_empty', 'all_products', 'cities', 'regions']));
+        return view('pages.cart.index', compact(['is_empty', 'all_products', 'regions', 'cities']));
     }
 
     public function check()

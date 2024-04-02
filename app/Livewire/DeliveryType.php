@@ -8,7 +8,7 @@ use Livewire\Component;
 class DeliveryType extends Component
 {
     public $price=0;
-    public $type=4;
+    public $type=1;
 
     public function delivery($type)
     {

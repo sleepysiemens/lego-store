@@ -1,18 +1,14 @@
-<div>
-    <div class="col-12">
-        <div class="form-item w-100 mb-3 mb-lg-0">
-            <select class="form-control" name="region">
-                @foreach($regions as $region)
-                    <option value="{{$region}}">{{$region}}</option>
-                @endforeach
-            </select>
+<div class="w-100">
+    @if($lock)
+        <div class="position-absolute top-0 mt-3 mx-3" style="left: 0; right: 0">
+            <div class="form-item w-100 mb-3 position-relative">
+                <input type="text" class="form-control" value="Новосибирская обл." readonly>
+            </div>
+
+            <div class="form-item w-100 mb-0 position-relative">
+                <input type="text" class="form-control" value="Новосибирск" readonly>
+            </div>
         </div>
-        <div class="form-item w-100 mb-3 mb-lg-0">
-            <select class="form-control" name="city">
-                @foreach($cities as $city)
-                    <option value="{{$city}}">{{$city}}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
+    @endif
+
 </div>

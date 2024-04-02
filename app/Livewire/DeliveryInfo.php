@@ -3,37 +3,27 @@
 namespace App\Livewire;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class DeliveryInfo extends Component
 {
-    public function render()
+    public $lock=false;
+    #[On('UpdateDelivery')]
+    public function change_lock()
     {
-        if(!Cache::has('cities') and Cache::has('regions'))
-        {
-            $cities=Cache::get('cities');
-            $regions=Cache::get('regions');
-        }
+        if(Session::get('delivery')['type']==4)
+            $this->lock=true;
         else
         {
-            if (file_exists(public_path('cities_list.json')))
-            {
-                $cities=collect(json_decode(file_get_contents(public_path('cities_list.json'))));
-                $regions=$cities->pluck('region')->unique()->values()->all();
-                $cities=$cities->pluck('city')->unique()->values()->all();
-                Cache::put('cities', $cities);
-                Cache::put('regions', $regions);
-            }
-            else
-            {
-                $cities=[];
-                $regions=[];
-            }
-
+            $this->lock = false;
         }
-
-        return view('livewire.delivery-info', compact(['cities', 'regions']));
     }
 
 
+    public function render()
+    {
+        return view('livewire.delivery-info');
+    }
 }
