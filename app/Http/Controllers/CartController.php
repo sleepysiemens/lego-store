@@ -15,7 +15,7 @@ class CartController extends Controller
     {
         $is_empty=Session::get('cart')==null;
         $all_products=$this->cacheService->products_cache();
-
+/*
         if(!Cache::has('cities') and Cache::has('regions'))
         {
             $cities=Cache::get('cities');
@@ -33,10 +33,16 @@ class CartController extends Controller
                 $regions = [];
             }
         }
-
+*/
         //dd(json_encode($cities));
 
-        return view('pages.cart.index', compact(['is_empty', 'all_products', 'regions', 'cities']));
+        return view('pages.cart.index',
+            compact(['is_empty',
+                'all_products'
+                #'regions',
+                #'cities'
+            ])
+        );
     }
 
     public function check()

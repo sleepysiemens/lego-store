@@ -10,6 +10,7 @@ use Livewire\Component;
 class CartTotal extends Component
 {
     #[On('UpdateCart')]
+    #[On('UpdateDeliveryPrice')]
     #[On('UpdateDelivery')]
     public function render()
     {
@@ -28,7 +29,7 @@ class CartTotal extends Component
 
 
 
-        if(Session::get('delivery')!=null)
+        if(isset(Session::get('delivery')['price']))
             $delivery=Session::get('delivery')['price'];
 
         return view('livewire.cart-total', compact(['total', 'delivery']));

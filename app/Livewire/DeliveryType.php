@@ -7,29 +7,34 @@ use Livewire\Component;
 
 class DeliveryType extends Component
 {
-    public $price=0;
-    public $type=1;
+    public $type;
+
+    public function mount()
+    {
+        if(Session::has('delivery'))
+        {
+            $s_delivery=Session::get('delivery');
+            if(isset($s_delivery['type']))
+            {
+                $this->type=$s_delivery['type'];
+            }
+            else
+            {
+                $this->type=1;
+            }
+        }
+    }
 
     public function delivery($type)
     {
-        switch ($type)
-        {
-            case 1:
-                $price=200;
-                break;
-            case 2:
-                $price=300;
-                break;
-            case 3:
-                $price=400;
-                break;
-            case 4:
-                $price=0;
-                break;
-        }
+        $s_delivery=Session::get('delivery');
 
-        Session::put('delivery',['type'=>$type, 'price'=>$price]);
-        $this->price=$price;
+        if($type==4)
+            $s_delivery['price']=0;
+
+        $s_delivery['type']=$type;
+        Session::put('delivery',$s_delivery);
+
         $this->type=$type;
         $this->dispatch('UpdateDelivery');
 

@@ -21,7 +21,7 @@
                         </div>
                     </th>
                     <td>
-                        <a href="{{route('shop.show', $product->number)}}" class="mb-0 mt-4 d-block">{{$product->title}}</a>
+                        <a href="{{route('shop.show', $product->number)}}" class="mb-0 mt-4 d-block" style="max-width: 500px ;max-height: 70px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{$product->title}}</a>
                     </td>
                     <td>
                         <p class="mb-0 mt-4">{{$product->number}}</p>

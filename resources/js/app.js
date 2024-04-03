@@ -6,10 +6,10 @@ const app = createApp({});
 
 import SearchbarComponent from './components/SearchbarComponent.vue';
 import MainSearchComponent from './components/MainSearchComponent.vue';
-import DeliveryDataComponent from './components/DeliveryDataComponent.vue';
+//import DeliveryDataComponent from './components/DeliveryDataComponent.vue';
 
 app.component('searchbar-component', SearchbarComponent);
 app.component('main-search-component', MainSearchComponent);
-app.component('delivery-data-component', DeliveryDataComponent);
+//app.component('delivery-data-component', DeliveryDataComponent);
 
 app.mount('#app');

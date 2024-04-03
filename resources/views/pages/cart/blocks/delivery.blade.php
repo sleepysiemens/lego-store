@@ -38,8 +38,7 @@
 
             <div class="card">
                 <div class="card-body position-relative">
-                    <delivery-data-component :regions="{{json_encode($regions)}}" :cities="{{json_encode($cities)}}"></delivery-data-component>
-                    <livewire:DeliveryInfo/>
+                    <livewire:DeliveryInfo lazy/>
                 </div>
             </div>
 
